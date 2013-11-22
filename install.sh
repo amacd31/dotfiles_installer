@@ -44,7 +44,7 @@ for file in $files; do
     if [ ! -L "$HOME/.$file" ]
     then
         echo "Moving $file from $HOME to $olddir"
-        mv $HOME/.$file $HOME/dotfiles_old/
+        mv $HOME/.$file $olddir
     fi
     echo "Creating symlink to $file in home directory."
     ln -f -s $dotfiles_dir/$file $HOME/.$file
