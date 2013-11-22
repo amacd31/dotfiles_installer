@@ -38,18 +38,15 @@ echo "Changing to the $dotfiles_dir directory"
 cd $dotfiles_dir
 echo "...done"
 
-# Move any existing dotfiles in $HOME to $olddir and remove any existing
-# symlinks; then create symlinks to the dotfiles/* files.
+# Move any existing dotfiles in $HOME to $olddir;
+# Then create symlinks to the dotfiles/* files replacing existing symlinks as neccessary.
 for file in $files; do
-    if [ -L "$HOME/.$file" ]
+    if [ ! -L "$HOME/.$file" ]
     then
-        echo "Removing old symlink to $file"
-        rm -rf $HOME/.$file
-    else
         echo "Moving $file from $HOME to $olddir"
         mv $HOME/.$file $HOME/dotfiles_old/
     fi
     echo "Creating symlink to $file in home directory."
-    ln -s $dotfiles_dir/$file $HOME/.$file
+    ln -f -s $dotfiles_dir/$file $HOME/.$file
 done
 
