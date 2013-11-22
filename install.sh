@@ -47,6 +47,6 @@ for file in $files; do
         mv $HOME/.$file $olddir
     fi
     echo "Creating symlink to $file in home directory."
-    ln -f -s $dotfiles_dir/$file $HOME/.$file
+    ln -fsT $dotfiles_dir/$file $HOME/.$file
 done
 
