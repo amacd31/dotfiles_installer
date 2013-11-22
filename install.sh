@@ -28,7 +28,7 @@
 dotfiles_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && cd `pwd`/../ && pwd )
 installer_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 olddir=$HOME/dotfiles_old
-files=$(find ~/dotfiles -maxdepth 1 ! -path $dotfiles_dir ! -path $installer_dir ! -name deploy.sh ! -name ".git*" -exec basename {} \;)
+files=$(find $dotfiles_dir -maxdepth 1 ! -path $dotfiles_dir ! -path $installer_dir ! -name deploy.sh ! -name ".git*" -exec basename {} \;)
 
 echo "Creating $olddir for backup of any existing dotfiles in $HOME"
 mkdir -p $olddir
