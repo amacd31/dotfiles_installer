@@ -38,6 +38,14 @@ echo "Changing to the $dotfiles_dir directory"
 cd $dotfiles_dir
 echo "...done"
 
+platform=$(uname);
+if [[ $platform == 'Linux' ]]; then
+    ln_args="-fsT";
+elif [[ $platform == 'Darwin' ]]; then
+    ln_args="-fsn"
+fi;
+
+
 # Move any existing dotfiles in $HOME to $olddir;
 # Then create symlinks to the dotfiles/* files replacing existing symlinks as neccessary.
 for file in $files; do
@@ -47,6 +55,6 @@ for file in $files; do
         mv $HOME/.$file $olddir
     fi
     echo "Creating symlink to $file in home directory."
-    ln -fsT $dotfiles_dir/$file $HOME/.$file
+    ln $ln_args $dotfiles_dir/$file $HOME/.$file
 done
 
